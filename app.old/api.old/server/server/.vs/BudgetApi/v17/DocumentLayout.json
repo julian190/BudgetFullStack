@@ -1,0 +1,159 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\source\\test\\NextJS\\Budget\\server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\controllers\\expensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:controllers\\expensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\models\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:models\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\models\\period.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:models\\period.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\controllers\\periodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:controllers\\periodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\controllers\\incomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:controllers\\incomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|d:\\source\\test\\nextjs\\budget\\server\\migrations\\20250102022316_cleaninit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEE84DA7-3C7D-4E8F-AF44-E4F3C5115D89}|BudgetApi.csproj|solutionrelative:migrations\\20250102022316_cleaninit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Expense.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Models\\Expense.cs",
+              "RelativeDocumentMoniker": "Models\\Expense.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Models\\Expense.cs",
+              "RelativeToolTip": "Models\\Expense.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T02:25:39.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Period.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Models\\Period.cs",
+              "RelativeDocumentMoniker": "Models\\Period.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Models\\Period.cs",
+              "RelativeToolTip": "Models\\Period.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T02:24:44.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PeriodController.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\PeriodController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PeriodController.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\PeriodController.cs",
+              "RelativeToolTip": "Controllers\\PeriodController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAkwBgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T23:04:17.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Controllers\\CategoryController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwDUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T20:13:21.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IncomeController.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\IncomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IncomeController.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\IncomeController.cs",
+              "RelativeToolTip": "Controllers\\IncomeController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T20:13:03.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20250102022316_Cleaninit.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Migrations\\20250102022316_Cleaninit.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250102022316_Cleaninit.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Migrations\\20250102022316_Cleaninit.cs",
+              "RelativeToolTip": "Migrations\\20250102022316_Cleaninit.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAgwGsAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T02:23:24.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExpenseController.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\ExpenseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ExpenseController.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Controllers\\ExpenseController.cs",
+              "RelativeToolTip": "Controllers\\ExpenseController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAewK4AAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T02:44:28.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\source\\test\\NextJS\\Budget\\server\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\source\\test\\NextJS\\Budget\\server\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAowFkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-01T04:47:15.183Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
