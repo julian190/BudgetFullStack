@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { toast } from '@/components/ui/use-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { MonthWithPeriods } from '@/types/budget';
+import Link  from 'next/link';
 
 interface Expense {
   id: number;
@@ -216,8 +217,13 @@ export default function ExpensesPage() {
     setSelectedPeriod(0);
     setFilteredExpenses([]);
   }
+
+  const selectedFilteredMonth = periods.find(month => month.monthId === selectedMonth);
+
       return (
     <div className="container mx-auto py-8 px-4 space-y-6">
+                  <Link href='/' className="text-accent">Back</Link>
+
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">Expenses</h1>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -239,6 +245,7 @@ export default function ExpensesPage() {
               </svg>
               Add Expense
             </Button>
+
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -363,7 +370,10 @@ export default function ExpensesPage() {
               <SelectContent>
               <SelectItem value={0}>All Weeks</SelectItem>
 
-                {periods.flatMap(month => month.periods.map(period => (
+                { selectedFilteredMonth ?  selectedFilteredMonth.periods.map(period => (
+                  <SelectItem key={period.id} value={period.id}>
+                    {period.weekName}
+                  </SelectItem>)):periods.flatMap(month => month.periods.map(period => (
                   <SelectItem key={period.id} value={period.id}>
                     {period.weekName}
                   </SelectItem>

@@ -1,6 +1,6 @@
 import prisma from "./prisma"
 function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, dayName:number):Date {
-    const previousMonth = month === 1 ? 12 : month - 1;
+    const previousMonth = month === 1 ? 12 : month - 1 === 0 ?12 : month - 1;
     const previousYear = month === 1 ? year - 1 : year;
     const day25 = new Date(previousYear, previousMonth - 1, dayNumber);
   
@@ -11,12 +11,12 @@ function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, da
   export async function CreateMonthAndPeriods(userid: string): Promise<void> {
     // Create month and periods
     const currentYear = new Date().getFullYear();
-      const currentMonth = new Date().getMonth() + 1;
+      const currentMonth = new Date().getMonth() + 2;
       const dayNumber = 25; // Assuming "25th" is fixed
       const dayName = 0; // Sunday corresponds to 0 in JavaScript
   
       const firstSunday = getFirstSundayAfter25th(currentYear, currentMonth, dayNumber, dayName);
-      let current = new Date(firstSunday);
+      let current = new Date();
   
       const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
       const nextYear = currentMonth === 12 ? currentYear + 1 : currentYear;
