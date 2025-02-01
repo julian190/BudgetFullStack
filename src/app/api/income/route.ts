@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
+import { Decimal } from '@prisma/client/runtime/library';
+
+interface Income {
+  id: string; // or number, depending on your database schema
+  source: string;
+  amount: Decimal;
+  frequency: string; // or a more specific type if applicable
+  date: Date;
+}
 
 export async function GET(request: Request) {
   const session = await getServerSession(authOptions)
@@ -182,10 +191,10 @@ async function getIncomes(userId: string) {
     }
   })
 
-  return NextResponse.json(incomes.map(i => ({
+  return NextResponse.json(incomes.map((i: Income) => ({
     ...i,
     date: i.date.toISOString().split('T')[0]
-  })))
+  })));
 }
 
 async function getIncome(userId: string, id: string) {
