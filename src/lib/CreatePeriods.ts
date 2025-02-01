@@ -21,14 +21,14 @@ function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, da
       const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
       const nextYear = currentMonth === 12 ? currentYear + 1 : currentYear;
   
-      const periodLength = getFirstSundayAfter25th(nextYear, nextMonth, dayNumber, dayName) - firstSunday;
+      const periodLength:number = getFirstSundayAfter25th(nextYear, nextMonth, dayNumber, dayName).getTime() - firstSunday.getTime();
       const monthEnd = new Date(firstSunday.getTime() + periodLength);
   
       let weekNumber = 1;
       let monthId = "";
   
       // Retrieve or create the month record
-      let month = await prisma.month.findFirst({
+      const month = await prisma.month.findFirst({
           where: { userId: userid, year: currentYear, monthNumber: currentMonth },
       });
   

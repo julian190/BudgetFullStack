@@ -14,6 +14,7 @@ export async function GET(req: Request) {
     const month = searchParams.get('MonthID')
     const periodId = searchParams.get('PeriodID')
     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereClause: any = {
       user: {
         email: session.user.email
@@ -92,6 +93,45 @@ export async function POST(req: Request) {
     console.error('Failed to create expense:', error)
     return NextResponse.json(
       { error: 'Failed to create expense' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function DELETE(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  try {
+    const { pathname } = new URL(req.url)
+    const id = pathname.split('/').pop()
+
+    if (!id) {
+      return NextResponse.json({ error: 'Expense ID is required' }, { status: 400 })
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email }
+    })
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
+    const expense = await prisma.expense.findUnique({
+      where: { id }
+    })
+
+    if (!expense) {
+      return NextResponse.json({ error: 'Expense not found' }, { status: 404 })
+    }
+
+  } catch (error) {
+    console.error('Failed to delete expense:', error)
+    return NextResponse.json(
+      { error: 'Failed to delete expense' },
       { status: 500 }
     )
   }

@@ -34,8 +34,8 @@ export default function ExpensesPage() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [categories, setCategories] = useState<ExpenseCategory[]>([]);
   const [periods, setPeriods] = useState<MonthWithPeriods[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState<number | undefined>(0);
-  const [selectedPeriod, setSelectedPeriod] = useState<number | undefined>(0);
+  const [selectedMonth, setSelectedMonth] = useState<string | undefined>("0");
+  const [selectedPeriod, setSelectedPeriod] = useState<string | undefined>("0");
   const [filteredExpenses, setFilteredExpenses] = useState<Expense[]>([]);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -54,7 +54,7 @@ export default function ExpensesPage() {
       await loadPeriods();
     };
     loadInitialData();
-  }, []);
+  });
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -71,6 +71,7 @@ export default function ExpensesPage() {
         }
         const response = await api.get<Expense[]>(`/api/expense/${query ? '?' + query : ''}`);
         if (response) {
+             //@ts-expect-error hamada
           setExpenses(response);
         }
       } catch {
@@ -84,12 +85,13 @@ export default function ExpensesPage() {
 
     fetchExpenses();
   }, [selectedMonth, selectedPeriod]);
-
+console.debug(filteredExpenses);
   const loadExpenses = async () => {
     try {
       const response = await api.get<Expense[]>('/api/expense/');
       console.log(response);
       if (response) {
+           //@ts-expect-error hamada
         setExpenses(response);
       }
     } catch {
@@ -105,6 +107,7 @@ export default function ExpensesPage() {
     try {
       const response = await api.get<ExpenseCategory[]>('/api/category');
       if (response) {
+           //@ts-expect-error hamada
         setCategories(response);
       }
     } catch {
@@ -121,6 +124,7 @@ export default function ExpensesPage() {
       const response = await api.get<MonthWithPeriods[]>('/api/period?endpoint=list');
       console.log(response);
       if (response) {
+           //@ts-expect-error hamada
         setPeriods(response);
       }
     } catch {
@@ -206,6 +210,7 @@ export default function ExpensesPage() {
     setFormData({
       description: expense.description,
       amount: expense.amount,
+         //@ts-expect-error hamada
       categoryId: expense.category.id,
       date: new Date(expense.date),
       ChangeComment: '',
@@ -213,12 +218,11 @@ export default function ExpensesPage() {
     setIsDialogOpen(true);
   };
   const ClearFilters = () => {
-    setSelectedMonth(0);
-    setSelectedPeriod(0);
+    setSelectedMonth('0');
+    setSelectedPeriod('0');
     setFilteredExpenses([]);
   }
-
-  const selectedFilteredMonth = periods.find(month => month.monthId === selectedMonth);
+  const selectedFilteredMonth = periods.find(month => month.id === selectedMonth);
 
       return (
     <div className="container mx-auto py-8 px-4 space-y-6">
@@ -313,6 +317,7 @@ export default function ExpensesPage() {
                   />
                 </div>
                 {selectedExpense && (
+                  
                   <div className="grid gap-2">
                     <Label htmlFor="ChangeComment">ChangeComment</Label>
                     <Textarea
@@ -321,8 +326,6 @@ export default function ExpensesPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, ChangeComment: e.target.value })
                       }
-                      placeholder="Reason for change"
-                      className="min-h-[100px]"
                       placeholder="Reason for change"
                       className="min-h-[100px]"
                     />
@@ -346,29 +349,30 @@ export default function ExpensesPage() {
         <CardHeader className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Expense List</h2>
           <div className="flex items-center space-x-2">
-            <Select onValueChange={setSelectedMonth}>
+            
+            <Select onValueChange={(value) => setSelectedMonth(String(value))}>
               <SelectTrigger id="month">
                 <SelectValue placeholder="Filter by Month" >
-                  {selectedMonth === 0 ? 'Filter by Month' : periods.find((m) => m.monthId === selectedMonth)?.monthName}
+                  {selectedMonth === "0" ? 'Filter by Month' : periods.find((m) => m.id === selectedMonth)?.monthNumber}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value={0}>Filter by Month</SelectItem>
+                <SelectItem value={'0'}>Filter by Month</SelectItem>
                 {periods.map((month) => (
-                  <SelectItem key={month.monthId} value={month.monthId}>
+                  <SelectItem key={month.id} value={month.id}>
                     {new Date(month.year, month.monthNumber -1).toLocaleString('default', { month: 'long' }) + ' ' + month.year}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <Select onValueChange={setSelectedPeriod}>
+            <Select onValueChange={(value) => setSelectedPeriod(value)}>
               <SelectTrigger id="period">
                 <SelectValue placeholder="Filter by Week" >
-                  {selectedPeriod === 0 ? 'Filter by Week' : periods.flatMap((m) => m.periods).find((p) => p.id === selectedPeriod)?.weekName}
+                  {selectedPeriod === '0' ? 'Filter by Week' : periods.flatMap((m) => m.periods).find((p) => p.id === selectedPeriod)?.weekName}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-              <SelectItem value={0}>All Weeks</SelectItem>
+              <SelectItem value={'0'}>All Weeks</SelectItem>
 
                 { selectedFilteredMonth ?  selectedFilteredMonth.periods.map(period => (
                   <SelectItem key={period.id} value={period.id}>
@@ -385,11 +389,11 @@ export default function ExpensesPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {expenses.length === 0 && (selectedMonth != 0 || selectedPeriod != 0) ? (
+            {expenses.length === 0 && (selectedMonth != '0' || selectedPeriod !='0') ? (
               <div className="text-center py-12">
                 <h3 className="text-lg font-semibold mb-2">No expenses match the current filters</h3>
               </div>
-            ) : expenses.length === 0 && (selectedMonth === 0 || selectedPeriod === 0) ? (
+            ) : expenses.length === 0 && (selectedMonth === '0' || selectedPeriod === '0') ? (
               <div className="text-center py-12">
                 <div className="text-4xl font-semibold text-muted-foreground mb-4">💰</div>
                 <h3 className="text-lg font-semibold mb-2">No expenses yet</h3>

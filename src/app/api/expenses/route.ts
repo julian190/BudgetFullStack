@@ -84,7 +84,7 @@ export async function POST(request: Request) {
         userId
       }
     })
-
+    console.debug(periodId)
     return NextResponse.json(newExpense, { status: 201 })
   } catch (error) {
     console.error('Failed to create expense:', error)

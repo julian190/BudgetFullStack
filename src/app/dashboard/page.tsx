@@ -7,7 +7,7 @@ import { api } from '../../lib/api';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { DashboardSummary } from '../../components/DashboardSummary';
 import type { Income, ExpenseCategory, Expense, NewIncome, NewExpense, NewCategory } from '../../types/budget';
-import { Period } from '@prisma/client';
+//import { Period } from '@prisma/client';
 export default function Dashboard() {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [categories, setCategories] = useState<ExpenseCategory[]>([]);
@@ -26,6 +26,7 @@ export default function Dashboard() {
   const [userSession, setUserSession] = useState<{ user?: { id: string } } | null>(null);
   const router = useRouter();
 
+  console.debug(userSession);
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -63,7 +64,9 @@ export default function Dashboard() {
       ]);
 
       if (incomesResponse && categoriesResponse) {
+        //@ts-expect-error hamada
         setIncomes(incomesResponse);
+          //@ts-expect-error hamada
         setCategories(categoriesResponse);
       }
     } catch (error: unknown) {

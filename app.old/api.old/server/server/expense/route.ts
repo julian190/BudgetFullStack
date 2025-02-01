@@ -20,11 +20,11 @@ export async function GET(request: Request) {
         userId: session.user.id,
         ...(monthId && {
           category: {
-            monthId: Number(monthId)
+            monthId: monthId
           }
         }),
         ...(periodId && {
-          periodId: Number(periodId)
+          periodId: String(periodId)
         })
       },
       include: {
@@ -43,6 +43,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(expenses)
   } catch (error) {
+    console.error(error)
     return NextResponse.json(
       { error: 'Failed to fetch expenses' },
       { status: 500 }
@@ -88,23 +89,24 @@ export async function POST(request: Request) {
     })
 
     // Create expense history
-    await prisma.expenseHistory.create({
-      data: {
-        expenseId: newExpense.id,
-        userId: session.user.id,
-        description,
-        amount,
-        categoryId,
-        date: new Date(date),
-        changedAt: new Date(),
-        action: 'Created'
-      }
-    })
+    // await prisma.expenseHistory.create({
+    //   data: {
+    //     expenseId: newExpense.id,
+    //     userId: session.user.id,
+    //     description,
+    //     amount,
+    //     categoryId,
+    //     date: new Date(date),
+    //     changedAt: new Date(),
+    //     action: 'Created'
+    //   }
+    // })
 
     return NextResponse.json(newExpense, { status: 201 })
   } catch (error) {
+    console.error(error)
     return NextResponse.json(
       { error: 'Failed to create expense' },
       { status: 500 }
     )
-  }
+  }}

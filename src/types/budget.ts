@@ -1,14 +1,14 @@
 export interface Period {
-  PeriodId: number;
-  PeriodName: string;
+  id: string;
+  weekName: string;
   PeriodStart: string;
   PeriodEnd: string;
 }
 
 export interface MonthWithPeriods {
-  MonthId: number;
-  MonthNumber: number;
-  MonthYear: number;
+  id: string;
+  monthNumber: number;
+  year: number;
   periods: Period[];
 }
 
