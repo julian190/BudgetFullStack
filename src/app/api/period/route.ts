@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { CreateMonthAndPeriods } from '@/lib/CreatePeriods';
 
+
 export async function POST() {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
@@ -114,7 +115,7 @@ async function getPeriods(userId: string) {
     }
   })
 
-  const formattedMonths = months.map((month) => ({
+  const formattedMonths = months.map((month: { id: string; year: number; monthNumber: number; periods: { id: string; startDate: Date; endDate: Date; weekName: string }[] }) => ({
     monthId: month.id,
     year: month.year,
     monthNumber: month.monthNumber,
