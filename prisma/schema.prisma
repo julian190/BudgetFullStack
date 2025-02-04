@@ -17,7 +17,7 @@ model User {
   
   expenses      Expense[]
   incomes       Income[]
-  budgetSetting BudgetSetting?
+  budgetSetting BudgetSetting[]
   auditLogs     AuditLog[]
   periods       Period[]
   budgetShares      BudgetShare[] @relation("Owner")
@@ -96,8 +96,8 @@ model Period {
 
 model BudgetSetting {
   id          String   @id @default(cuid())
-  userId      String   @unique
-  ConfigName String
+  userId      String   
+  ConfigName  String
   ConfigValue String
   createdAt   DateTime @default(now())
   
@@ -127,7 +127,7 @@ model BudgetShare {
 
 model Account {
   id                String  @id @default(cuid())
-  userId            String
+  userId            String   @unique
   type              String
   provider          String
   providerAccountId String
