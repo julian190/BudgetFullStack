@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
           
        
             await prisma.budgetSetting.upsert({
-              where: { userId: user.id },
+              where: { id: user.id },
               update: {
                 ConfigName: "CycleStartDayNumber",
                 ConfigValue: "25"
@@ -76,7 +76,7 @@ export const authOptions: NextAuthOptions = {
               }
             })
             await prisma.budgetSetting.upsert({
-              where: { userId: user.id },
+              where: { id: user.id },
               update: {
                 ConfigName: "CycleStartDayName",
                 ConfigValue: "0"
