@@ -89,7 +89,6 @@ console.debug(filteredExpenses);
   const loadExpenses = async () => {
     try {
       const response = await api.get<Expense[]>('/api/expense/');
-      console.log(response);
       if (response) {
            //@ts-expect-error hamada
         setExpenses(response);
@@ -122,7 +121,6 @@ console.debug(filteredExpenses);
   const loadPeriods = async () => {
     try {
       const response = await api.get<MonthWithPeriods[]>('/api/period?endpoint=list');
-      console.log(response);
       if (response) {
            //@ts-expect-error hamada
         setPeriods(response);
