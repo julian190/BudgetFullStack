@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
   if (token && isSIgnoutPage) {
     console.log('Redirecting to login page for signout');
     const response = NextResponse.redirect(new URL('/login', request.url));
-    response.cookies.set('next-auth.session-token', '', {
+    response.cookies.set('__Secure-next-auth.session-token', '', {
       path: '/',
       expires: new Date(0),
       httpOnly: true,
