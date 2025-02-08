@@ -4,9 +4,9 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import prisma from "./prisma"
 import bcrypt from "bcryptjs"
 import { CreateMonthAndPeriods } from "./CreatePeriods"
+import crypto from 'crypto'
 
-
-
+// Extend the built-in Session type to include user data
 declare module "next-auth" {
   interface Session {
     user: {
@@ -18,9 +18,7 @@ declare module "next-auth" {
   }
 }
 
-
-
-
+// Configure NextAuth.js
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -131,7 +129,7 @@ export const authOptions: NextAuthOptions = {
   useSecureCookies: process.env.NODE_ENV === 'production',
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name: `${process.env.NODE_ENV === 'production' ? '__Secure-' : ''}next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -158,7 +156,7 @@ export const authOptions: NextAuthOptions = {
       }
     }
   },
-  secret: process.env.NEXTAUTH_SECRET || "default-dev-secret", // Fallback secret
+  secret: process.env.NEXTAUTH_SECRET || crypto.randomUUID(), // Use a dynamic secret for development
   callbacks: {
     async session({ session, token }) {
       if (token?.sub) {
