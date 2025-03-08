@@ -71,17 +71,17 @@ import prisma from '@/lib/prisma'
 //     )
 //   }
 // }
-
-export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
-  const { params } = context;
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const id = params.id; // Extract ID safely
+
   try {
     const category = await prisma.expenseCategory.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!category) {
@@ -89,7 +89,7 @@ export async function DELETE(req: NextRequest, context: { params: { id: string }
     }
 
     await prisma.expenseCategory.delete({
-      where: { id: params.id }
+      where: { id }
     })
 
     return NextResponse.json({ message: 'Category deleted' })
