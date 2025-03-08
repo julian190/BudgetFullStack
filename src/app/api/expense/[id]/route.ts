@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest,NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
@@ -104,15 +104,16 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+
+export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
- console.log(params);
+
   try {
-    const { pathname } = new URL(req.url)
-    const id = pathname.split('/').pop()
+    const { pathname } = new URL(req.url) // Get the pathname
+    const id = pathname.split('/').pop()  // Extract the ID from the URL
 
     if (!id) {
       return NextResponse.json({ error: 'Expense ID is required' }, { status: 400 })
@@ -132,12 +133,12 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     if (!expense) {
       return NextResponse.json({ error: 'Expense not found' }, { status: 404 })
     }
+
     await prisma.expense.delete({
       where: { id }
     })
-    return NextResponse.json({ message: 'Expense deleted' })
-  
 
+    return NextResponse.json({ message: 'Expense deleted' })
   } catch (error) {
     console.error('Failed to delete expense:', error)
     return NextResponse.json(

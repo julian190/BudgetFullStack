@@ -71,10 +71,10 @@ import prisma from '@/lib/prisma'
 //     )
 //   }
 // }
-export async function DELETE(req: NextRequest) {
-  const { searchParams } = req.nextUrl;  // Use nextUrl to extract params
 
-  const id = searchParams.get('id'); // Extract id from the URL
+export async function DELETE(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const id = pathname.split('/')[3];  // Extract ID from the URL path
 
   if (!id) {
     return NextResponse.json({ error: 'ID is required' }, { status: 400 })
