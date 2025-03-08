@@ -94,6 +94,5 @@ function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, da
               break;
           } 
       }
-      const TodayDate =new Date()
      
   }
