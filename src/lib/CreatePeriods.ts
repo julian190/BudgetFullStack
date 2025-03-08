@@ -1,6 +1,4 @@
-import { date } from "zod";
 import prisma from "./prisma"
-import { getDate } from "date-fns";
 function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, dayName:number):Date {
     const previousMonth = month === 1 ? 12 : month - 1 === 0 ?12 : month - 1;
     const previousYear = month === 1 ? year - 1 : year;
@@ -96,16 +94,6 @@ function getFirstSundayAfter25th(year:number, month:number, dayNumber:number, da
               break;
           } 
       }
-      // Set all months to inactive first
-      await prisma.month.updateMany({
-          where: { userId: userid },
-          data: { active: false }
-      });
-
-      // Set the current month to active
-      await prisma.month.update({
-          where: { id: monthId },
-          data: { active: true }
-      });
+      const TodayDate =new Date()
      
   }

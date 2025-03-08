@@ -109,7 +109,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
-
+ console.log(params);
   try {
     const { pathname } = new URL(req.url)
     const id = pathname.split('/').pop()

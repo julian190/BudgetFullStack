@@ -135,7 +135,6 @@ export default function Dashboard() {
     }
   };
 
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<{ type: 'category' | 'expense'; id: string } | null>(null);
   const handleDeleteCategory = async (categoryId: string) => {
     try {
       setIsSubmitting(true);
@@ -143,7 +142,6 @@ export default function Dashboard() {
 
       await api.delete(`/api/category/${categoryId}`);
       await fetchData();
-      setShowDeleteConfirmation(null);
     } catch (error: unknown) {
       if (error && typeof error === 'object' && 'data' in error) {
         const apiError = error as { data?: { message?: string } };
@@ -172,7 +170,6 @@ export default function Dashboard() {
 
       await api.delete(`/api/expense/${expenseId}`);
       await fetchData();
-      setShowDeleteConfirmation(null);
     } catch (error: unknown) {
       if (error && typeof error === 'object' && 'data' in error) {
         const apiError = error as { data?: { message?: string } };
