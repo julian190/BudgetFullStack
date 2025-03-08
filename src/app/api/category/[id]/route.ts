@@ -71,33 +71,39 @@ import prisma from '@/lib/prisma'
 //     )
 //   }
 // }
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session?.user?.email) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+export async function DELETE(req: NextRequest) {
+  const { searchParams } = req.nextUrl;  // Use nextUrl to extract params
+
+  const id = searchParams.get('id'); // Extract id from the URL
+
+  if (!id) {
+    return NextResponse.json({ error: 'ID is required' }, { status: 400 })
   }
 
-  const id = params.id; // Extract ID safely
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const category = await prisma.expenseCategory.findUnique({
       where: { id }
-    })
+    });
 
     if (!category) {
-      return NextResponse.json({ error: 'Category not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Category not found' }, { status: 404 });
     }
 
     await prisma.expenseCategory.delete({
       where: { id }
-    })
+    });
 
-    return NextResponse.json({ message: 'Category deleted' })
+    return NextResponse.json({ message: 'Category deleted' });
   } catch (error) {
-    console.error('Failed to delete category:', error)
+    console.error('Failed to delete category:', error);
     return NextResponse.json(
       { error: 'Failed to delete category' },
       { status: 500 }
-    )
+    );
   }
 }
