@@ -12,6 +12,12 @@ interface DashboardSummaryProps {
   loading: boolean;
 }
 
+interface CategoryData {
+  name: string;
+  budget: number;
+  actual: number;
+}
+
 export function DashboardSummary({ incomes, categories, loading }: DashboardSummaryProps) {
   if (loading) {
     return (
@@ -28,12 +34,11 @@ export function DashboardSummary({ incomes, categories, loading }: DashboardSumm
   }, 0);
 
   // Calculate expenses by category
-  const expensesByCategory = categories.map(category => ({
+  const expensesByCategory: CategoryData[] = categories.map(category => ({
     name: category.name,
     budget: category.budget,
     actual: category.expenses.reduce((sum, expense) => sum + expense.amount, 0),
   }));
-
   // Calculate total expenses
   const totalExpenses = expensesByCategory.reduce((sum, category) => sum + category.actual, 0);
 
@@ -42,7 +47,7 @@ export function DashboardSummary({ incomes, categories, loading }: DashboardSumm
     name: category.name,
     value: category.actual,
   }));
-
+console.log(categories)
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">Financial Summary</h2>
@@ -101,8 +106,15 @@ export function DashboardSummary({ incomes, categories, loading }: DashboardSumm
               <YAxis />
               <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
               <Legend />
-              <Bar dataKey="budget" fill="#8884d8" name="Budget" />
-              <Bar dataKey="actual" fill="#82ca9d" name="Actual" />
+              <Bar dataKey="budget" name="Budget" fill="#8884d8" />
+              <Bar dataKey="actual" name="Actual">
+                {expensesByCategory.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.actual > entry.budget ? '#ef4444' : '#82ca9d'}
+                  />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

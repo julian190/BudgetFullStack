@@ -3,37 +3,36 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 
-export async function GET() {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
-    const categories = await prisma.expenseCategory.findMany({
-      where: {
-        user: {
-          email: session.user.email
-        },month: {
-          active: true
-        }
-      },
+    const category = await prisma.expenseCategory.findUnique({
+      where: { id: params.id },
       include: {
         expenses: true,
         month: true
       }
     })
-    return NextResponse.json(categories)
+
+    if (!category) {
+      return NextResponse.json({ error: 'Category not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(category)
   } catch (error) {
-    console.error('Failed to fetch categories:', error)
+    console.error('Failed to fetch category:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch categories' },
+      { error: 'Failed to fetch category' },
       { status: 500 }
     )
   }
 }
 
-export async function POST(req: Request) {
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -41,61 +40,47 @@ export async function POST(req: Request) {
 
   try {
     const { name, budget } = await req.json()
-    
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email }
-    })
-    
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
-    }
+    const budgetFloat = parseFloat(budget)
 
-    const month = await prisma.month.findFirst({
-      where: { userId: user.id },
-      orderBy: { id: 'desc' },
-    });
-        
-    if (!month) {
-      return NextResponse.json({ error: 'Month not found' }, { status: 404 })
-    }
-    const budgetfloat : number =  parseFloat(budget)
-    if (isNaN(budgetfloat)) {
+    if (isNaN(budgetFloat)) {
       return NextResponse.json({ error: 'Budget must be a number' }, { status: 400 })
     }
 
-    const newCategory = await prisma.expenseCategory.create({
+    const category = await prisma.expenseCategory.findUnique({
+      where: { id: params.id }
+    })
+
+    if (!category) {
+      return NextResponse.json({ error: 'Category not found' }, { status: 404 })
+    }
+
+    const updatedCategory = await prisma.expenseCategory.update({
+      where: { id: params.id },
       data: {
         name,
-        budget:budgetfloat,
-        monthId:month.id,
-        userId: user.id
+        budget: budgetFloat
       }
     })
 
-    return NextResponse.json(newCategory, { status: 201 })
+    return NextResponse.json(updatedCategory)
   } catch (error) {
-    console.error('Failed to create category:', error)
+    console.error('Failed to update category:', error)
     return NextResponse.json(
-      { error: 'Failed to create category' },
+      { error: 'Failed to update category' },
       { status: 500 }
     )
   }
 }
-export async function DELETE(req: Request) {
+
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
-    const { searchParams } = new URL(req.url)
-    const id = searchParams.get('id')
-    if (!id) {
-      return NextResponse.json({ error: 'Category ID is required' }, { status: 400 })
-    }
-
     const category = await prisma.expenseCategory.findUnique({
-      where: { id: id }
+      where: { id: params.id }
     })
 
     if (!category) {
@@ -103,7 +88,7 @@ export async function DELETE(req: Request) {
     }
 
     await prisma.expenseCategory.delete({
-      where: { id: id }
+      where: { id: params.id }
     })
 
     return NextResponse.json({ message: 'Category deleted' })

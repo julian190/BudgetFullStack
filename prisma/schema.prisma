@@ -60,10 +60,11 @@ model Month {
   monthNumber Int
   year        Int
   userId      String
-  
   user            User            @relation(fields: [userId], references: [id])
   expenseCategories ExpenseCategory[]
   periods          Period[]
+  active Boolean @default(false)
+  MonthNotes String @default("")
 
   @@unique([userId, year, monthNumber], name: "user_month_unique")
 }
